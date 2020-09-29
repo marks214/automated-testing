@@ -4,12 +4,14 @@
 class Card
   attr_reader :value, :suit
 
-  CARDS_IN_DECK = [:hearts, :spades, :clubs, :diamonds] + (1..13).to_a
+  VALID_SUITS = [:hearts, :spades, :clubs, :diamonds]
+  VALID_CARDS = (1..13).to_a
 
   def initialize(value, suit)
     @value = value
     @suit = suit
-    raise ArgumentError.new("invalid card") unless CARDS_IN_DECK.include? @value
+    raise ArgumentError.new("invalid suit") unless VALID_SUITS.include? @suit
+    raise ArgumentError.new("invalid card") unless VALID_CARDS.include? @value
 
   end
 
@@ -25,12 +27,4 @@ class Card
     return "#{convert_num_to_face(value)} of #{suit.to_s}"
   end
 
-  def self.value
-    card = self.new(@value, @suit)
-    return @value
-  end
-
-  def self.suit
-
-  end
 end
